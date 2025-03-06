@@ -8,13 +8,9 @@ import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.compose.material3.Switch
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.example.bar.CardLibrary
-import com.example.bar.ComponentCardUtils.dpToPx
 
 object FirebaseManager {
 
@@ -103,7 +99,7 @@ object FirebaseManager {
 
     fun saveSelectedToViewLibraries(
         context: Context,
-        cardUIElementsList: List<CardUIElements>,
+        cardUIElementsList: List<cardUIElements>,
         lib: CardLibrary
     ) {
         // Создание диалога для ввода имени сборки
@@ -173,7 +169,7 @@ object FirebaseManager {
     private fun saveToPublicLibraries(
         userId: String,
         name: String,
-        cardUIElementsList: List<CardUIElements>,
+        cardUIElementsList: List<cardUIElements>,
         lib: CardLibrary,
         context: Context,
         dialog: AlertDialog
@@ -189,7 +185,7 @@ object FirebaseManager {
             if (selectedItem != null) {
                 if (lib.getComponentTypesByCardId(cardUIElement.cardId) != ComponentType.OTHER) {
                     name_ = lib.getComponentTypesByCardId(cardUIElement.cardId)
-                        ?.let { it1 -> getComponentNameByType(it1).toString() }
+                        ?.let { it1 -> getComponentNameByType(it1, context).toString() }
                         .toString()
                 } else {
                     name_ = cardUIElement.cardId
@@ -224,7 +220,7 @@ object FirebaseManager {
     private fun saveToPersonalViewLibraries(
         userId: String,
         name: String,
-        cardUIElementsList: List<CardUIElements>,
+        cardUIElementsList: List<cardUIElements>,
         lib: CardLibrary,
         context: Context,
         dialog: AlertDialog
@@ -243,7 +239,7 @@ object FirebaseManager {
             if (selectedItem != null) {
                 if (lib.getComponentTypesByCardId(cardUIElement.cardId) != ComponentType.OTHER) {
                     name_ = lib.getComponentTypesByCardId(cardUIElement.cardId)
-                        ?.let { it1 -> getComponentNameByType(it1).toString() }
+                        ?.let { it1 -> getComponentNameByType(it1, context).toString() }
                         .toString()
                 } else {
                     name_ = cardUIElement.cardId
@@ -275,16 +271,16 @@ object FirebaseManager {
     }
 
 
-    fun getComponentNameByType(type: ComponentType): String? {
+    fun getComponentNameByType(type: ComponentType, context: Context): String? {
         return when (type) {
-            ComponentType.MB -> "Motherboard"
-            ComponentType.CPU -> "Processor"
-            ComponentType.GPU -> "Graphics Card"
-            ComponentType.RAM -> "RAM"
-            ComponentType.COOL -> "Cooling"
-            ComponentType.DISK -> "Storage"
-            ComponentType.CASE -> "Case"
-            ComponentType.BP -> "Power Supply"
+            ComponentType.MB -> context.getString(R.string.MB)
+            ComponentType.CPU -> context.getString(R.string.CPU)
+            ComponentType.GPU -> context.getString(R.string.GPU)
+            ComponentType.RAM -> context.getString(R.string.RAM)
+            ComponentType.COOL -> context.getString(R.string.COOL)
+            ComponentType.DISK -> context.getString(R.string.DISK)
+            ComponentType.CASE -> context.getString(R.string.CASE)
+            ComponentType.BP -> context.getString(R.string.BP)
             ComponentType.OTHER -> null // Returns null for OTHER
         }
     }

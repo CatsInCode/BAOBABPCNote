@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:fontFamily="@font/anta"
-        android:text="Enter build name"
+        android:text="@string/BUILD_NAME_H"
         android:textColor="#FF5722"
         android:textSize="20sp" />
 
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF5722"
-        android:hint="Name"
+        android:hint="@string/NAME"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#353535"
@@ -41,7 +41,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/anta"
             android:padding="0dp"
-            android:text="CANSEL"
+            android:text="@string/CANCEL"
             android:textColor="#FF5722"
             app:layout_constraintEnd_toStartOf="@+id/confirmButton" />
 
@@ -52,7 +52,7 @@
             android:background="#00FFFFFF"
             android:fontFamily="@font/anta"
             android:padding="0dp"
-            android:text="SAVE"
+            android:text="@string/SAVE"
             android:textColor="#FF5722"
             app:iconPadding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +60,10 @@
 
         <Switch
             android:id="@+id/switch1"
-            android:layout_width="106dp"
+            android:layout_width="wrap_content"
             android:layout_height="29dp"
             android:fontFamily="@font/anta"
-            android:text="Publick?"
+            android:text="@string/TXT_10"
             android:textColor="#FF5722"
             tools:layout_editor_absoluteX="4dp"
             tools:layout_editor_absoluteY="3dp" />

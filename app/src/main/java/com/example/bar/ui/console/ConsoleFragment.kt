@@ -26,6 +26,24 @@ class ConsoleFragment : Fragment() {
     ): View {
         _binding = FragmentConsoleBinding.inflate(inflater, container, false)
 
+        val comSoonLayout = binding.ComSoon
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            database.getReference("users").child(userId).child("role").get()
+                .addOnSuccessListener { snapshot ->
+                    val role = snapshot.value as? String
+                    if (role == "admin") {
+                        // Делаем layout прозрачным и отключаем возможность взаимодействия
+                        comSoonLayout.alpha = 0f   // Прозрачный (невидимый)
+                        comSoonLayout.isClickable = false   // Отключаем клики
+                        comSoonLayout.isFocusable = false   // Отключаем фокусировку
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(requireContext(), "Ошибка проверки роли: ${exception.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+
         // Обработка команды через ввод текста
         binding.commandInput.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
@@ -180,6 +198,37 @@ class ConsoleFragment : Fragment() {
                         }
                     }
                     .addOnFailureListener { displayOutput("Ошибка доступа к базе данных: ${it.message}") }
+            }
+
+            "/copyUserData" -> {
+                if (args.size < 3) {
+                    displayOutput("Ошибка: Укажите UID источника и UID цели.")
+                    return
+                }
+                val sourceUID = args[1]
+                val targetUID = args[2]
+
+                // Получаем данные пользователя-источника
+                database.getReference("users").child(sourceUID).get()
+                    .addOnSuccessListener { sourceSnapshot ->
+                        if (!sourceSnapshot.exists()) {
+                            displayOutput("Ошибка: Пользователь с UID $sourceUID не найден.")
+                            return@addOnSuccessListener
+                        }
+
+                        // Копируем данные пользователя-источника
+                        val sourceData = sourceSnapshot.value
+                        database.getReference("users").child(targetUID).setValue(sourceData)
+                            .addOnSuccessListener {
+                                displayOutput("Данные пользователя $sourceUID успешно скопированы в $targetUID.")
+                            }
+                            .addOnFailureListener { exception ->
+                                displayOutput("Ошибка при копировании данных: ${exception.message}")
+                            }
+                    }
+                    .addOnFailureListener { exception ->
+                        displayOutput("Ошибка доступа к данным источника: ${exception.message}")
+                    }
             }
 
             // Удаление сборки из viewLibraries

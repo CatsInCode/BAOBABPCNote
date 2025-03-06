@@ -7,15 +7,6 @@
     android:background="@drawable/bg2"
     tools:ignore="ExtraText"><![CDATA[
     tools:context=".ui.gallery.GalleryFragment">
-
-
-
-
-
-
-
-
-
     ]]>
 
     <ScrollView
@@ -67,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/anta"
-                    android:text="Create new build"
+                    android:text="@string/TXT_1"
                     android:textColor="#909090"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView5"

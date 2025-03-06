@@ -13,7 +13,7 @@ import com.example.bar.FirebaseManager
 import com.example.bar.ComponentType
 import com.example.bar.databinding.FragmentHomeBinding
 import com.example.bar.CardLibrary
-import com.example.bar.CardUIElements
+import com.example.bar.cardUIElements
 import com.example.bar.ComponentCardUtils.getComponentsByCardId
 import com.example.bar.ComponentCardUtils.saveComponent
 import com.example.bar.R
@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val cardUIElementsList = mutableListOf<CardUIElements>()
+    private val cardUIElementsList = mutableListOf<cardUIElements>()
 
     // Список компонентов и адаптер для Spinner
 
@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
             adapter: SpinnerAdapter
         ) {
             // Создаем объект CardUIElements с переданными параметрами
-            val cardUI = CardUIElements(
+            val cardUI = cardUIElements(
                 cardId = cardId,
                 addButton = addButton,
                 spinner = spinner,
@@ -247,7 +247,7 @@ class HomeFragment : Fragment() {
             cardCounter++
         }
 
-        fun autoAddCard(name:String): CardUIElements? {
+        fun autoAddCard(name:String): cardUIElements? {
             //Добавление карточки
             val newCardElements = ComponentCardUtils.addCard_USENAME(
                 context = requireContext(),

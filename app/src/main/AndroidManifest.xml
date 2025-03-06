@@ -13,6 +13,14 @@
         android:theme="@style/Theme.Bar"
         tools:targetApi="31">
         <activity
+            android:name=".ui.FirstFragment"
+            android:exported="false"
+            android:theme="@style/Theme.Bar" />
+        <activity
+            android:name=".ui.reg.RegActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.reg.RegLogInActivity"
             android:exported="true"
             android:screenOrientation="portrait">

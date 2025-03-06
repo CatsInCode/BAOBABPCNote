@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BAOBAB_PC</string>
+
+    <string name="OK">Ок </string>
+    <string name="SAVE">Сохранить </string>
+    <string name="CANCEL">Отмена </string>
+    <string name="NAME">Имя </string>
+    <string name="LOG">Войти </string>
+    <string name="REG">Создать </string>
+
+    <string name="MB">Материнская плата: </string>
+    <string name="CPU">Процессор: </string>
+    <string name="GPU">Видеокарта: </string>
+    <string name="RAM">ОЗУ: </string>
+    <string name="COOL">Охлаждение: </string>
+    <string name="DISK">Хранилище: </string>
+    <string name="CASE">Корпус: </string>
+    <string name="BP">БП: </string>
+    <string name="COST">Цена: </string>
+    <string name="BUILD_NAME_H">Название сборки </string>
+    <string name="ADD">+</string>
+    <string name="ADD_BOTT">Добавить </string>
+    <string name="EXP">Карточка </string>
+
+    <string name="TXT_1">Создать новую сборку: </string>
+    <string name="TXT_2">Добавить компонент </string>
+    <string name="TXT_3">Имя </string>
+    <string name="TXT_4">Ок </string>
+    <string name="TXT_5">Отмена </string>
+    <string name="TXT_6">Цена </string>
+    <string name="TXT_7">Выйти из аккаунта? </string>
+    <string name="TXT_8">Добавить компонент </string>
+    <string name="TXT_9">Вы уверены? </string>
+    <string name="TXT_10">Выложить?ㅤ</string>
+    <string name="TXT_11">ПК Блокнот </string>
+    <string name="TXT_12"> </string>
+    <string name="TXT_13"> </string>
+
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Конфигуратор</string>
+    <string name="menu_gallery">Мои сборки</string>
+    <string name="menu_slideshow">Просмотрщик</string>
+    <string name="menu_console">Консоль</string>
+    <string name="previous">Назад</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
+    <string name="first_fragment_label">Первый фрагмент</string>
+    <string name="second_fragment_label">Второй фрагмент</string>
+</resources>

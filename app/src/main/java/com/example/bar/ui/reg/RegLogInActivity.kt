@@ -25,8 +25,15 @@ class RegLogInActivity : AppCompatActivity() {
 
         val emailField = findViewById<EditText>(R.id.editText)
         val passwordField = findViewById<EditText>(R.id.editTextTextPassword)
-        val loginButton = findViewById<Button>(R.id.button3)
+        val loginButton = findViewById<Button>(R.id.button)
+        val regButton = findViewById<Button>(R.id.button3)
         val avatarField = findViewById<EditText>(R.id.ava)
+
+        regButton.setOnClickListener {
+            val intent = Intent(this, RegActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         loginButton.setOnClickListener {
             val email = emailField.text.toString().trim()
@@ -53,56 +60,17 @@ class RegLogInActivity : AppCompatActivity() {
                         intent.putExtra("USER_ID", userId)
                         startActivity(intent)
                         finish()
-
-                        updateAvatar(avatarUrl)
                     }
                 } else {
                     Toast.makeText(this, "Registration...", Toast.LENGTH_LONG).show()
-                    registerNewUser(email, password, avatarUrl)
+                    val intent = Intent(this, RegActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }
     }
 
-    private fun registerNewUser(email: String, password: String, avatarUrl: String) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { loginTask ->
-                            if (loginTask.isSuccessful) {
-                                val randomUsername = generateRandomUsername()
-                                val userId = auth.currentUser?.uid
-
-                                val database = FirebaseDatabase.getInstance()
-                                val userRef = database.getReference("users").child(userId!!)
-
-                                val userMap = mutableMapOf<String, Any>(
-                                    "username" to randomUsername,
-                                    "avatar" to avatarUrl
-                                )
-
-                                userRef.setValue(userMap)
-                                    .addOnSuccessListener {
-                                        Toast.makeText(this, "Учётная запись создана и пользователь вошел", Toast.LENGTH_SHORT).show()
-
-                                        userId?.let {
-                                            sharedViewModel.setUserId(it)  // Устанавливаем userId в ViewModel
-                                        }
-
-                                        val intent = Intent(this, Note2Activity::class.java)
-                                        intent.putExtra("USER_ID", userId)
-                                        startActivity(intent)
-                                        finish()
-                                    }
-                            }
-                        }
-                } else {
-                    Toast.makeText(this, "Ошибка регистрации", Toast.LENGTH_LONG).show()
-                }
-            }
-    }
-
-    private fun updateAvatar(avatarUrl: String) {
+    /*private fun updateAvatar(avatarUrl: String) {
         val userId = auth.currentUser?.uid
         if (avatarUrl.isNotEmpty() && userId != null) {
             val database = FirebaseDatabase.getInstance()
@@ -114,8 +82,5 @@ class RegLogInActivity : AppCompatActivity() {
         }
     }
 
-    private fun generateRandomUsername(): String {
-        val chars = "abcdefghijklmnopqrstuvwxyz"
-        return (1..5).map { chars.random() }.joinToString("")
-    }
+     */
 }

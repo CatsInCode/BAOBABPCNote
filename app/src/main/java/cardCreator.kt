@@ -272,7 +272,7 @@ object ComponentCardUtils {
         cardId: Int,
         sbButton: LinearLayout,
         cardLibrary: CardLibrary
-    ): CardUIElements? { // Изменили тип возвращаемого значения на CardUIElements
+    ): cardUIElements? { // Изменили тип возвращаемого значения на cardUIElements
         // Инфлейт кастомного диалогового окна
         val dialogView = LayoutInflater.from(context).inflate(R.layout.name_enter, null)
         val nameInput = dialogView.findViewById<EditText>(R.id.CUSTOM_nameInput)
@@ -280,7 +280,7 @@ object ComponentCardUtils {
         val cancelButton = dialogView.findViewById<Button>(R.id.cancelButton)
 
         // Переменная для хранения результата
-        var result: CardUIElements? = null
+        var result: cardUIElements? = null
 
         // Создаём и отображаем диалог
         val dialog = AlertDialog.Builder(context,  R.style.CustomAlertDialog)
@@ -339,7 +339,7 @@ object ComponentCardUtils {
             val editView = cardView.findViewById<ImageView>(R.id.CUSTOM_editView)
 
             // Сохраняем результат
-            result = CardUIElements(
+            result = cardUIElements(
                 cardId = cardId.toString(), // Преобразуем ID в строку
                 addButton = addButton,
                 spinner = spinner,
@@ -379,7 +379,7 @@ object ComponentCardUtils {
         sbButton: LinearLayout,
         cardLibrary: CardLibrary,
         cardName: String
-    ): CardUIElements? {
+    ): cardUIElements? {
         // Инфлейт кастомного диалогового окна
         val dialogView = LayoutInflater.from(context).inflate(R.layout.name_enter, null)
         val nameInput = dialogView.findViewById<EditText>(R.id.CUSTOM_nameInput)
@@ -387,65 +387,65 @@ object ComponentCardUtils {
         val cancelButton = dialogView.findViewById<Button>(R.id.cancelButton)
 
         // Переменная для хранения результата
-        var result: CardUIElements? = null
+        var result: cardUIElements? = null
 
 
-            // Инфлейт XML компонента
-            val inflater = LayoutInflater.from(context)
-            val cardView = inflater.inflate(R.layout.component_card, parentLayout, false) as ConstraintLayout
+        // Инфлейт XML компонента
+        val inflater = LayoutInflater.from(context)
+        val cardView = inflater.inflate(R.layout.component_card, parentLayout, false) as ConstraintLayout
 
-            // Устанавливаем уникальный ID для новой карточки
-            cardView.id = cardId
+        // Устанавливаем уникальный ID для новой карточки
+        cardView.id = cardId
 
-            // Привязка новой карточки к предыдущей
-            val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                topToBottom = bp
-                startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                topMargin =  (if (previousViewId > 0) (20 + (170 * previousViewId)) else 20).dpToPx(context) // 20dp отступ сверху
-            }
-            cardView.layoutParams = layoutParams
+        // Привязка новой карточки к предыдущей
+        val layoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.MATCH_PARENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            topToBottom = bp
+            startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+            endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+            topMargin =  (if (previousViewId > 0) (20 + (170 * previousViewId)) else 20).dpToPx(context) // 20dp отступ сверху
+        }
+        cardView.layoutParams = layoutParams
 
-            // Добавляем карточку в родительский layout
-            parentLayout.addView(cardView)
+        // Добавляем карточку в родительский layout
+        parentLayout.addView(cardView)
 
-            // Устанавливаем имя карточки
-            val cardNameView = cardView.findViewById<TextView>(R.id.CUSTOM_cardName)
-            cardNameView.text = cardName
+        // Устанавливаем имя карточки
+        val cardNameView = cardView.findViewById<TextView>(R.id.CUSTOM_cardName)
+        cardNameView.text = cardName
 
-            // Привязка кнопки SB к низу новой карточки
-            val sbLayoutParams = sbButton.layoutParams as ConstraintLayout.LayoutParams
-            sbLayoutParams.topToBottom = cardId
-            sbLayoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-            sbLayoutParams.topMargin = 20.dpToPx(context) // 20dp отступ сверху
-            sbButton.layoutParams = sbLayoutParams
+        // Привязка кнопки SB к низу новой карточки
+        val sbLayoutParams = sbButton.layoutParams as ConstraintLayout.LayoutParams
+        sbLayoutParams.topToBottom = cardId
+        sbLayoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+        sbLayoutParams.topMargin = 20.dpToPx(context) // 20dp отступ сверху
+        sbButton.layoutParams = sbLayoutParams
 
-            // Находим нужные элементы внутри карточки
-            val addButton = cardView.findViewById<Button>(R.id.CUSTOM_addButton)
-            val spinner = cardView.findViewById<Spinner>(R.id.CUSTOM_spinnerVariant)
-            val costView = cardView.findViewById<TextView>(R.id.CUSTOM_costView)
-            val editView = cardView.findViewById<ImageView>(R.id.CUSTOM_editView)
+        // Находим нужные элементы внутри карточки
+        val addButton = cardView.findViewById<Button>(R.id.CUSTOM_addButton)
+        val spinner = cardView.findViewById<Spinner>(R.id.CUSTOM_spinnerVariant)
+        val costView = cardView.findViewById<TextView>(R.id.CUSTOM_costView)
+        val editView = cardView.findViewById<ImageView>(R.id.CUSTOM_editView)
 
-            // Сохраняем результат
+        // Сохраняем результат
 
 
-            val cardId_ = cardLibrary.addCard(cardName)
-            ComponentCardUtils.createComponentCard(
-                addButton, // Кнопка добавления
-                spinner,         // Spinner
-                costView, // TextView для отображения цены
-                editView, // Кнопка редактирования
-                ComponentType.OTHER, // Тип компонента
-                mutableListOf<Component>(),       // Список компонентов
-                ComponentCardUtils.createAdapter(context, spinner),    // Адаптер Spinner
-                cardLibrary,
-                cardId_
-            )
+        val cardId_ = cardLibrary.addCard(cardName)
+        ComponentCardUtils.createComponentCard(
+            addButton, // Кнопка добавления
+            spinner,         // Spinner
+            costView, // TextView для отображения цены
+            editView, // Кнопка редактирования
+            ComponentType.OTHER, // Тип компонента
+            mutableListOf<Component>(),       // Список компонентов
+            ComponentCardUtils.createAdapter(context, spinner),    // Адаптер Spinner
+            cardLibrary,
+            cardId_
+        )
 
-            result = CardUIElements(cardId_, addButton, spinner, costView, editView)
+        result = cardUIElements(cardId_, addButton, spinner, costView, editView)
 
         // Возвращаем результат
         return result

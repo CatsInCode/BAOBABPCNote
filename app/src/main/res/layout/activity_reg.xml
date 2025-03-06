@@ -8,35 +8,6 @@
     android:background="@drawable/bg2"
     tools:context=".ui.reg.RegLogInActivity">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword">
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_marginRight="5dp"
-            android:backgroundTint="#FD6635"
-            android:text="@string/LOG" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_marginLeft="5dp"
-            android:backgroundTint="#FD6635"
-            android:text="@string/REG" />
-
-    </LinearLayout>
-
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
@@ -47,10 +18,24 @@
         android:hint="email"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:text="rrrtttxxx@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/fill_red_border"
+        android:ems="10"
+        android:hint="name"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -62,22 +47,23 @@
         android:hint="password"
         android:inputType="textPassword"
         android:padding="10dp"
-        android:text="qwerty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <EditText
-        android:id="@+id/ava"
+        android:id="@+id/editTextTextPassword2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/fill_red_border"
         android:ems="10"
-        android:hint="URL AVA"
-        android:inputType="text"
-        android:visibility="invisible"
+        android:hint="repeat password"
+        android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="5510dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -88,4 +74,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginRight="5dp"
+            android:backgroundTint="#FD6635"
+            android:padding="7dp"
+            android:text="@string/REG" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="#FD6635"
+            android:text="@string/LOG" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

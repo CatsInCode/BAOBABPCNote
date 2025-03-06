@@ -6,7 +6,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 
-data class CardUIElements(
+data class cardUIElements(
     val cardId: String, // ID карточки
     val addButton: Button,
     val spinner: Spinner,

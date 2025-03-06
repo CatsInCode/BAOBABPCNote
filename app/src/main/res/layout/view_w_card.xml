@@ -16,7 +16,7 @@
         android:backgroundTintMode="add"
         android:editable="false"
         android:fontFamily="@font/anta"
-        android:hint="Build name"
+        android:hint="@string/BUILD_NAME_H"
         android:padding="10dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#555555"

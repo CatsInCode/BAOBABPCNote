@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:fontFamily="@font/anta"
-        android:text="Do you want to log out of your account?"
+        android:text="@string/TXT_7"
         android:textColor="#FF5722"
         android:textSize="20sp" />
 
@@ -33,7 +33,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/anta"
             android:padding="0dp"
-            android:text="CANSEL"
+            android:text="@string/CANCEL"
             android:textColor="#FF5722"
             app:layout_constraintEnd_toStartOf="@+id/confirmButton" />
 
@@ -44,11 +44,12 @@
             android:background="#00FFFFFF"
             android:fontFamily="@font/anta"
             android:padding="0dp"
-            android:text="OK"
+            android:text="@string/OK"
             android:textColor="#FF5722"
             app:iconPadding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="0dp"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

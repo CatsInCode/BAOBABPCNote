@@ -1,13 +1,55 @@
 <resources>
-    <string name="app_name">BAOBABPC</string>
+    <string name="app_name">BAOBAB_PC</string>
+
+    <string name="OK">Ok </string>
+    <string name="SAVE">Save </string>
+    <string name="CANCEL">Cancel </string>
+    <string name="NAME">Name </string>
+    <string name="LOG">Login </string>
+    <string name="REG">Register </string>
+
+    <string name="MB">Motherboard: </string>
+    <string name="CPU">CPU: </string>
+    <string name="GPU">Graphics Card: </string>
+    <string name="RAM">RAM Memory: </string>
+    <string name="COOL">Cooling: </string>
+    <string name="DISK">Storage: </string>
+    <string name="CASE">Case: </string>
+    <string name="BP">Power: </string>
+    <string name="COST">Cost: </string>
+    <string name="BUILD_NAME_H">Enter a build name </string>
+    <string name="ADD">ADD + </string>
+    <string name="ADD_BOTT">ADD + </string>
+    <string name="EXP">Export </string>
+
+    <string name="TXT_1">Create new build: </string>
+    <string name="TXT_2">Add component </string>
+    <string name="TXT_3">Name </string>
+    <string name="TXT_4">Save </string>
+    <string name="TXT_5">Cancel </string>
+    <string name="TXT_6">Cost </string>
+    <string name="TXT_7">Do you want to log out of your account? </string>
+    <string name="TXT_8">Add component </string>
+    <string name="TXT_9">Are you sure? </string>
+    <string name="TXT_10">Publick?</string>
+    <string name="TXT_11">PC Note </string>
+    <string name="TXT_12"> </string>
+    <string name="TXT_13"> </string>
+
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_console">Сonsole</string>
+    <string name="previous">-</string>
+    <string name="lorem_ipsum">-</string>
+    <string name="first_fragment_label">-</string>
+    <string name="second_fragment_label">-</string>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:fontFamily="@font/anta"
-        android:text="Add component"
+        android:text="@string/TXT_2"
         android:textColor="#FF5722"
         android:textSize="20sp" />
 
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF5722"
-        android:hint="Name"
+        android:hint="@string/TXT_3"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#353535"
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF5722"
-        android:hint="Cost"
+        android:hint="@string/TXT_6"
         android:inputType="numberDecimal"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
@@ -64,7 +64,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/anta"
             android:padding="0dp"
-            android:text="CANSEL"
+            android:text="@string/TXT_5"
             android:textColor="#FF5722"
             app:layout_constraintEnd_toStartOf="@+id/confirmButton" />
 
@@ -75,7 +75,7 @@
             android:background="#00FFFFFF"
             android:fontFamily="@font/anta"
             android:padding="0dp"
-            android:text="SAVE"
+            android:text="@string/TXT_4"
             android:textColor="#FF5722"
             app:iconPadding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
