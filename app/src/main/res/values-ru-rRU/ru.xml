@@ -8,6 +8,7 @@
     <string name="NAME">Имя </string>
     <string name="LOG">Войти </string>
     <string name="REG">Создать </string>
+    <string name="REFR">Обновить </string>
 
     <string name="MB">Материнская плата: </string>
     <string name="CPU">Процессор: </string>
@@ -36,6 +37,7 @@
     <string name="TXT_11">ПК Блокнот </string>
     <string name="TXT_12"> </string>
     <string name="TXT_13"> </string>
+    <string name="TXT_14">Ошибка загрузки, проверьте название карточки!</string>
 
 
 

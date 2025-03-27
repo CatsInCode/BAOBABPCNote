@@ -285,33 +285,30 @@ object FirebaseManager {
         }
     }
 
-    fun getAndCreateCardsByViewNamePUB(viewName: String, context: Context, parentLayout: ConstraintLayout) {
+    fun getAndCreateCardsByViewNamePUB(
+        viewName: String,
+        context: Context,
+        parentLayout: ConstraintLayout,
+        callback: (Result<Unit>) -> Unit
+    ) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        // Публичные сборки хранятся в разделе PUBLICK
         val publicRef = FirebaseDatabase.getInstance().getReference("PUBLICK").child(viewName)
 
         publicRef.get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
-                    // Очищаем родительский контейнер перед добавлением новых карточек
                     parentLayout.removeAllViews()
-
-                    // Проходим по каждому элементу в публичных сборках и создаем карточки
-                    var topMargin = 20.dpToPx(context) // Начальный отступ для первой карточки
-
+                    var topMargin = 20.dpToPx(context)
                     snapshot.children.forEach { cardSnapshot ->
-                        // Получаем данные карточки
                         val cardName = cardSnapshot.key ?: "Unknown"
                         val componentData = cardSnapshot.value as? Map<String, Any>
-
                         val name = componentData?.get("name") as? String ?: "Unknown"
                         val link = componentData?.get("link") as? String ?: "No link"
                         val price = componentData?.get("price") as? String ?: "0"
 
-                        // Загружаем layout карточки из XML
-                        val cardView = LayoutInflater.from(context).inflate(R.layout.visualizer_card, parentLayout, false) as ConstraintLayout
+                        val cardView = LayoutInflater.from(context)
+                            .inflate(R.layout.visualizer_card, parentLayout, false) as ConstraintLayout
 
-                        // Устанавливаем значения в карточку
                         val cardNameTextView = cardView.findViewById<TextView>(R.id.cardName)
                         val componentNameTextView = cardView.findViewById<TextView>(R.id.componentName)
                         val linkTextView = cardView.findViewById<TextView>(R.id.textView8)
@@ -322,26 +319,23 @@ object FirebaseManager {
                         linkTextView.text = link
                         priceTextView.text = "$price$"
 
-                        // Устанавливаем отступы для каждой карточки
                         val layoutParams = cardView.layoutParams as ConstraintLayout.LayoutParams
                         layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                         layoutParams.topMargin = topMargin
                         cardView.layoutParams = layoutParams
-
-                        // Добавляем карточку в родительский layout
                         parentLayout.addView(cardView)
-
-                        // Обновляем отступ для следующей карточки
-                        topMargin += 172.dpToPx(context) // Карточки имеют высоту 152dp и отступы 20dp
+                        topMargin += 172.dpToPx(context)
                     }
+                    callback(Result.success(Unit))
                 } else {
-                    Toast.makeText(context, "Ошибка: Запись с именем $viewName не найдена", Toast.LENGTH_SHORT).show()
+                    callback(Result.failure(Exception("ERROR_NOT_FOUND")))
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(context, "Ошибка при загрузке данных: ${e.message}", Toast.LENGTH_SHORT).show()
+                callback(Result.failure(Exception("ERROR_FETCHING_DATA: ${e.message}")))
             }
     }
+
 
     fun getAndCreateCardsByViewName(viewName: String, context: Context, parentLayout: ConstraintLayout) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid

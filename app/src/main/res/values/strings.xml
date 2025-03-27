@@ -7,6 +7,7 @@
     <string name="NAME">Name </string>
     <string name="LOG">Login </string>
     <string name="REG">Register </string>
+    <string name="REFR">Refresh </string>
 
     <string name="MB">Motherboard: </string>
     <string name="CPU">CPU: </string>
@@ -35,7 +36,7 @@
     <string name="TXT_11">PC Note </string>
     <string name="TXT_12"> </string>
     <string name="TXT_13"> </string>
-
+    <string name="TXT_14">Download error, check the card name!</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -52,4 +53,5 @@
     <string name="lorem_ipsum">-</string>
     <string name="first_fragment_label">-</string>
     <string name="second_fragment_label">-</string>
+
 </resources>
