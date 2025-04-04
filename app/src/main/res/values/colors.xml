@@ -7,4 +7,24 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Основные цвета для темной темы-->
+        <color name="background">#121212</color>
+        <color name="card_background">#202020 </color>
+        <color name="text_primary">#FFFFFF</color>
+        <color name="text_secondary">#BBBBBB</color>
+        <color name="accent_color">#FFA385</color>
+        <color name="button_color">#FD6635</color>
+        <color name="border_color">#FF5722 </color>
+        <color name="hint_color">#555555 </color>
+        <color name="edit_text_bg">#2D2D2D</color>
+    <!-- Основные цвета для светлой темы
+        <color name="background">#F5F5F5</color>
+        <color name="card_background">#FFFFFF</color>
+        <color name="text_primary">#333333</color>
+        <color name="text_secondary">#666666</color>
+        <color name="accent_color">#FF7043</color>
+        <color name="button_color">#FF5722</color>
+        <color name="border_color">#FF7043</color>
+        <color name="hint_color">#AAAAAA</color>
+        <color name="edit_text_bg">#FAFAFA</color>-->
 </resources>

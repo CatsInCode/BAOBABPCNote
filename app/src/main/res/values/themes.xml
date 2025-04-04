@@ -21,7 +21,7 @@
     </style>
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Dialog">
-        <item name="android:dialogCornerRadius">100dp</item>
+        <item name="android:dialogCornerRadius" tools:ignore="NewApi">100dp</item>
         <item name="android:windowMinWidthMajor">90%</item> <!-- Регулирует ширину (по желанию) -->
         <item name="android:windowMinWidthMinor">90%</item>
     </style>
