@@ -28,4 +28,10 @@
         android:name="com.example.bar.ui.console.ConsoleFragment"
         android:label="Console"
         tools:layout="@layout/fragment_console" />
+
+    <fragment
+        android:id="@+id/nav_crm"
+        android:name="com.example.bar.ui.CRM.CrmFragment"
+        android:label="CRM"
+        tools:layout="@layout/fragment_crm" />
 </navigation>

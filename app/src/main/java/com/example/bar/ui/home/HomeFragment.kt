@@ -13,6 +13,7 @@ import com.example.bar.FirebaseManager
 import com.example.bar.ComponentType
 import com.example.bar.databinding.FragmentHomeBinding
 import com.example.bar.CardLibrary
+import com.example.bar.ComponentCardUtils.ComponentCardElements
 import com.example.bar.cardUIElements
 import com.example.bar.ComponentCardUtils.getComponentsByCardId
 import com.example.bar.ComponentCardUtils.saveComponent
@@ -102,10 +103,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.button2, binding.processorSpinner, binding.textView4, binding.imageView2, adapter)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.button2, // Кнопка добавления
-            binding.processorSpinner,         // Spinner
-            binding.textView4, // TextView для отображения цены
-            binding.imageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.button2, // Кнопка добавления
+                binding.processorSpinner,         // Spinner
+                binding.textView4, // TextView для отображения цены
+                binding.imageView2, // Кнопка редактирования
+            ),
             ComponentType.MB, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapter,   // Адаптер Spinner
@@ -118,10 +121,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.PButton2, binding.PProcessorSpinner, binding.PTextView4, binding.PImageView2, adapterP)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.PButton2, // Кнопка добавления
-            binding.PProcessorSpinner,         // Spinner
-            binding.PTextView4, // TextView для отображения цены
-            binding.PImageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.PButton2, // Кнопка добавления
+                binding.PProcessorSpinner,         // Spinner
+                binding.PTextView4, // TextView для отображения цены
+                binding.PImageView2
+            ), // Кнопка редактирования
             ComponentType.CPU, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapterP,   // Адаптер Spinner
@@ -134,10 +139,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.GButton2, binding.GProcessorSpinner, binding.GTextView4, binding.GImageView2, adapterG)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.GButton2, // Кнопка добавления
-            binding.GProcessorSpinner,         // Spinner
-            binding.GTextView4, // TextView для отображения цены
-            binding.GImageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.GButton2, // Кнопка добавления
+                binding.GProcessorSpinner,         // Spinner
+                binding.GTextView4, // TextView для отображения цены
+                binding.GImageView2 // Кнопка редактирования
+            ),
             ComponentType.GPU, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapterG,    // Адаптер Spinner
@@ -150,10 +157,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.RButton2, binding.RProcessorSpinner, binding.RTextView4, binding.RImageView2, adapterR)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.RButton2, // Кнопка добавления
-            binding.RProcessorSpinner,         // Spinner
-            binding.RTextView4, // TextView для отображения цены
-            binding.RImageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.RButton2, // Кнопка добавления
+                binding.RProcessorSpinner,         // Spinner
+                binding.RTextView4, // TextView для отображения цены
+                binding.RImageView2 // Кнопка редактирования
+            ),
             ComponentType.RAM, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapterR,    // Адаптер Spinner
@@ -166,10 +175,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.FButton2, binding.FProcessorSpinner, binding.FTextView4, binding.FImageView2, adapterF)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.FButton2, // Кнопка добавления
-            binding.FProcessorSpinner,         // Spinner
-            binding.FTextView4, // TextView для отображения цены
-            binding.FImageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.FButton2, // Кнопка добавления
+                binding.FProcessorSpinner,         // Spinner
+                binding.FTextView4, // TextView для отображения цены
+                binding.FImageView2 // Кнопка редактирования
+            ),
             ComponentType.COOL, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapterF,    // Адаптер Spinner
@@ -182,10 +193,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.SButton2, binding.SProcessorSpinner, binding.STextView4, binding.SImageView2, adapterS)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.SButton2, // Кнопка добавления
-            binding.SProcessorSpinner,         // Spinner
-            binding.STextView4, // TextView для отображения цены
-            binding.SImageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.SButton2, // Кнопка добавления
+                binding.SProcessorSpinner,         // Spinner
+                binding.STextView4, // TextView для отображения цены
+                binding.SImageView2 // Кнопка редактирования
+            ),
             ComponentType.DISK, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapterS,    // Адаптер Spinner
@@ -198,10 +211,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.CASButton2, binding.CASProcessorSpinner, binding.CASTextView4, binding.CASImageView2, adapterCAS)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.CASButton2, // Кнопка добавления
-            binding.CASProcessorSpinner,         // Spinner
-            binding.CASTextView4, // TextView для отображения цены
-            binding.CASImageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.CASButton2, // Кнопка добавления
+                binding.CASProcessorSpinner,         // Spinner
+                binding.CASTextView4, // TextView для отображения цены
+                binding.CASImageView2, // Кнопка редактирования)
+            ),
             ComponentType.CASE, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapterCAS,    // Адаптер Spinner
@@ -214,10 +229,12 @@ class HomeFragment : Fragment() {
         addCardToStorage(cardId, binding.BPButton2, binding.BPProcessorSpinner, binding.BPTextView4, binding.BPImageView2, adapterB)
         baseCardIdList.add(cardId);
         ComponentCardUtils.createComponentCard(
-            binding.BPButton2, // Кнопка добавления
-            binding.BPProcessorSpinner,         // Spinner
-            binding.BPTextView4, // TextView для отображения цены
-            binding.BPImageView2, // Кнопка редактирования
+            ComponentCardElements(
+                binding.BPButton2, // Кнопка добавления
+                binding.BPProcessorSpinner,         // Spinner
+                binding.BPTextView4, // TextView для отображения цены
+                binding.BPImageView2, // Кнопка редактирования
+            ),
             ComponentType.BP, // Тип компонента
             mutableListOf<Component>(),       // Список компонентов
             adapterB,    // Адаптер Spinner

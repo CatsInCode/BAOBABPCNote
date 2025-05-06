@@ -12,8 +12,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import com.example.bar.AuthResponse
+import com.example.bar.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 object LibraryManager {
 
@@ -251,4 +256,12 @@ object LibraryManager {
     private fun Int.dpToPx(context: Context): Int {
         return (this * context.resources.displayMetrics.density).toInt()
     }
+}
+
+interface ApiService {
+    @POST("login")
+    suspend fun login(@Body user: User): Response<AuthResponse>
+
+    @POST("register")
+    suspend fun register(@Body user: User): Response<AuthResponse>
 }

@@ -20,5 +20,9 @@
             android:id="@+id/nav_console"
             android:icon="@drawable/ic_console"
             android:title="@string/menu_console" />
+        <item
+            android:id="@+id/nav_crm"
+            android:icon="@drawable/ic_console"
+            android:title="CRM" />
     </group>
 </menu>

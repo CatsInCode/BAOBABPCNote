@@ -367,11 +367,3 @@ object ComponentCardUtils {
     fun Int.dpToPx(context: Context): Int = 
         (this * context.resources.displayMetrics.density).toInt()
 }
-
-data class cardUIElements(
-    val cardId: String,
-    val addButton: Button,
-    val spinner: Spinner,
-    val priceTextView: TextView,
-    val editButton: ImageView
-)
