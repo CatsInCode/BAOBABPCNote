@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Основной цвет прямоугольника -->
+    <solid android:color="#101010" />
+
+    <!-- Обводка -->
+    <stroke
+        android:width="1dp"
+        android:color="#303030" />
+
+    <!-- Закругленные углы -->
+    <corners
+        android:radius="10dp" />
+
+</shape>

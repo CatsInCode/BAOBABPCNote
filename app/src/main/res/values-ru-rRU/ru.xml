@@ -55,4 +55,31 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
     <string name="first_fragment_label">Первый фрагмент</string>
     <string name="second_fragment_label">Второй фрагмент</string>
+
+    <string name="login_title">Вход</string>
+    <string name="email_hint">Электронная почта</string>
+    <string name="password_hint">Пароль</string>
+    <string name="login_button">Войти</string>
+
+    <!-- Orders -->
+    <string name="orders_title">Мои заказы</string>
+    <string name="create_order_button">Создать заказ</string>
+    <string name="build_id_hint">ID постройки</string>
+    <string name="phone_hint">Телефон</string>
+    <string name="address_hint">Адрес доставки</string>
+    <string name="notes_hint">Примечания (необязательно)</string>
+
+    <!-- Admin -->
+    <string name="admin_tools">Инструменты администратора</string>
+    <string name="manage_users">Управление пользователями</string>
+    <string name="view_all_orders">Просмотреть все заказы</string>
+
+    <!-- Dialog -->
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="confirm_delete">Подтвердить удаление</string>
+    <string name="delete_message">Вы уверены, что хотите удалить этот заказ?</string>
+
 </resources>

@@ -54,6 +54,29 @@
     <string name="first_fragment_label">-</string>
     <string name="second_fragment_label">-</string>
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_title">Login</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <!-- Orders -->
+    <string name="orders_title">My Orders</string>
+    <string name="create_order_button">Create New Order</string>
+    <string name="build_id_hint">Build ID</string>
+    <string name="phone_hint">Phone</string>
+    <string name="address_hint">Delivery Address</string>
+    <string name="notes_hint">Notes (optional)</string>
+    <!-- Admin -->
+    <string name="admin_tools">Admin Tools</string>
+    <string name="manage_users">Manage Users</string>
+    <string name="view_all_orders">View All Orders</string>
+    <!-- Dialog -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="delete_message">Are you sure you want to delete this order?</string>
 
 </resources>

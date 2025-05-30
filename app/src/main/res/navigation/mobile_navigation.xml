@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/nav_crm"
-        android:name="com.example.bar.ui.CRM.CrmFragment"
+        android:name="com.example.bar.ui.crm.CrmFragment"
         android:label="CRM"
         tools:layout="@layout/fragment_crm" />
 </navigation>
