@@ -166,6 +166,7 @@ object FirebaseManager {
     }
 
     // Функция для сохранения данных в публичные сборки
+// Функция для сохранения данных в публичные сборки с числовым ID
     private fun saveToPublicLibraries(
         userId: String,
         name: String,
@@ -176,45 +177,43 @@ object FirebaseManager {
     ) {
         val publicLibrariesRef = database.getReference("PUBLICK")
         val selectedData = mutableMapOf<String, Any>()
-        var name_: String
-        var componentData = mapOf("name" to "name")
 
-        // Итерируем по списку CardUIElements
+        // Генерируем уникальный числовой ID (например, на основе времени)
+        val numericId = System.currentTimeMillis()
+
+        // Добавим ID в корень сборки
+        publicLibrariesRef.child(name).child("buildId").setValue(numericId)
+
         for (cardUIElement in cardUIElementsList) {
             val selectedItem = cardUIElement.spinner.selectedItem
             if (selectedItem != null) {
-                if (lib.getComponentTypesByCardId(cardUIElement.cardId) != ComponentType.OTHER) {
-                    name_ = lib.getComponentTypesByCardId(cardUIElement.cardId)
-                        ?.let { it1 -> getComponentNameByType(it1, context).toString() }
-                        .toString()
-                } else {
-                    name_ = cardUIElement.cardId
-                }
+                val name_ = lib.getComponentTypesByCardId(cardUIElement.cardId)
+                    ?.let { getComponentNameByType(it, context).toString() }
+                    ?: cardUIElement.cardId
 
                 val (link, price) = lib.getComponentLinkAndPriceByCardIdAndName(
                     cardUIElement.cardId,
                     selectedItem.toString()
                 )
 
-                // Преобразуем выбранный объект в Map
-                componentData = mapOf(
+                val componentData = mapOf(
                     "name" to selectedItem.toString(),
                     "link" to link.toString(),
                     "price" to price.toString()
                 )
 
-                // Сохраняем данные в публичную коллекцию
+                // сохраняем в ветку по имени компонента
                 publicLibrariesRef.child(name).child(name_).setValue(componentData)
-                    .addOnSuccessListener {
-                        dialog.dismiss()
-                    }
                     .addOnFailureListener { e ->
-                        Toast.makeText(context, "Ошибка сохранения в публичные сборки: ${e.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Ошибка сохранения: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
             }
         }
-        Toast.makeText(context, "Сохранено в публичные", Toast.LENGTH_SHORT).show()
+
+        dialog.dismiss()
+        Toast.makeText(context, "Сохранено в публичные (ID: $numericId)", Toast.LENGTH_SHORT).show()
     }
+
 
     // Функция для сохранения данных в личные сборки
     private fun saveToPersonalViewLibraries(
@@ -289,7 +288,7 @@ object FirebaseManager {
         viewName: String,
         context: Context,
         parentLayout: ConstraintLayout,
-        callback: (Result<Unit>) -> Unit
+        callback: (Result<String>) -> Unit // Изменяем тип возвращаемого значения на String (ID)
     ) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         val publicRef = FirebaseDatabase.getInstance().getReference("PUBLICK").child(viewName)
@@ -299,34 +298,40 @@ object FirebaseManager {
                 if (snapshot.exists()) {
                     parentLayout.removeAllViews()
                     var topMargin = 20.dpToPx(context)
+
+                    // Получаем ID сборки
+                    val buildId = snapshot.child("buildId").getValue(Long::class.java)?.toString() ?: "N/A"
+
                     snapshot.children.forEach { cardSnapshot ->
-                        val cardName = cardSnapshot.key ?: "Unknown"
-                        val componentData = cardSnapshot.value as? Map<String, Any>
-                        val name = componentData?.get("name") as? String ?: "Unknown"
-                        val link = componentData?.get("link") as? String ?: "No link"
-                        val price = componentData?.get("price") as? String ?: "0"
+                        if (cardSnapshot.key != "buildId") { // Пропускаем поле buildId
+                            val cardName = cardSnapshot.key ?: "Unknown"
+                            val componentData = cardSnapshot.value as? Map<String, Any>
+                            val name = componentData?.get("name") as? String ?: "Unknown"
+                            val link = componentData?.get("link") as? String ?: "No link"
+                            val price = componentData?.get("price") as? String ?: "0"
 
-                        val cardView = LayoutInflater.from(context)
-                            .inflate(R.layout.visualizer_card, parentLayout, false) as ConstraintLayout
+                            val cardView = LayoutInflater.from(context)
+                                .inflate(R.layout.visualizer_card, parentLayout, false) as ConstraintLayout
 
-                        val cardNameTextView = cardView.findViewById<TextView>(R.id.cardName)
-                        val componentNameTextView = cardView.findViewById<TextView>(R.id.componentName)
-                        val linkTextView = cardView.findViewById<TextView>(R.id.textView8)
-                        val priceTextView = cardView.findViewById<TextView>(R.id.CUSTOM_costView)
+                            val cardNameTextView = cardView.findViewById<TextView>(R.id.cardName)
+                            val componentNameTextView = cardView.findViewById<TextView>(R.id.componentName)
+                            val linkTextView = cardView.findViewById<TextView>(R.id.textView8)
+                            val priceTextView = cardView.findViewById<TextView>(R.id.CUSTOM_costView)
 
-                        cardNameTextView.text = cardName
-                        componentNameTextView.text = name
-                        linkTextView.text = link
-                        priceTextView.text = "$price$"
+                            cardNameTextView.text = cardName
+                            componentNameTextView.text = name
+                            linkTextView.text = link
+                            priceTextView.text = "$price$"
 
-                        val layoutParams = cardView.layoutParams as ConstraintLayout.LayoutParams
-                        layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-                        layoutParams.topMargin = topMargin
-                        cardView.layoutParams = layoutParams
-                        parentLayout.addView(cardView)
-                        topMargin += 172.dpToPx(context)
+                            val layoutParams = cardView.layoutParams as ConstraintLayout.LayoutParams
+                            layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                            layoutParams.topMargin = topMargin
+                            cardView.layoutParams = layoutParams
+                            parentLayout.addView(cardView)
+                            topMargin += 172.dpToPx(context)
+                        }
                     }
-                    callback(Result.success(Unit))
+                    callback(Result.success(buildId)) // Возвращаем ID сборки
                 } else {
                     callback(Result.failure(Exception("ERROR_NOT_FOUND")))
                 }

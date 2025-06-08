@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.bar"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.bar"
@@ -56,8 +56,8 @@ android {
 dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.firebase.appdistribution.gradle)
-    implementation ("com.github.bumptech.glide:glide:4.16.0") // Обновленная версия Glide
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0") // Должен совпадать с версией Glide
+    implementation (libs.glide) // Обновленная версия Glide
+    annotationProcessor (libs.compiler) // Должен совпадать с версией Glide
     implementation(platform(libs.firebase.bom))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -71,19 +71,21 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.firebase.auth.ktx)
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.androidx.core.ktx.v1120)
+    implementation(libs.androidx.appcompat.v161)
+    implementation(libs.material.v1110)
+    implementation(libs.androidx.constraintlayout.v214)
 
     // Для работы с сетью
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
     // Для корутин
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    implementation(libs.material.v160)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

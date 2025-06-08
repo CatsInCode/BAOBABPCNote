@@ -79,4 +79,9 @@
     <string name="confirm_delete">Confirm Delete</string>
     <string name="delete_message">Are you sure you want to delete this order?</string>
 
+    <string name="filter_orders">Filter Orders</string>
+    <string name="status_new">New</string>
+    <string name="status_processing">Processing</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_cancelled">Cancelled</string>
 </resources>

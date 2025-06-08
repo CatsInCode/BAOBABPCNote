@@ -1225,8 +1225,8 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/button_color"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:text="@string/ADD_BOTT" />
 
                 <Button
@@ -1236,9 +1236,9 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/button_color"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/SAVE" />
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@string/save" />
 
                 <Button
                     android:id="@+id/export"

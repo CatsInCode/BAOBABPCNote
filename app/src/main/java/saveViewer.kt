@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.bar.AuthResponse
 import com.example.bar.User
@@ -26,12 +27,19 @@ object LibraryManager {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
 
     // Функция для импорта всех сборок
-    fun importLibrary(context: Context, cardLayout: ConstraintLayout, firstAnchorView: View, fragment: androidx.fragment.app.Fragment) {
-        val userId = auth.currentUser?.uid
+    fun importLibrary(
+        context: Context,
+        cardLayout: ConstraintLayout,
+        firstAnchorView: View,
+        fragment: Fragment,
+        onBuildIdFound: ((Long) -> Unit)? = null
+    ) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            val userRef = database.getReference("users").child(userId)
+            val userRef = FirebaseDatabase.getInstance().getReference("users").child(userId)
             var previousCardId: Int = firstAnchorView.id
-            // Импорт данных из cardLibraries
+
+            // --- Импорт из cardLibraries ---
             userRef.child("cardLibraries").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val cardViews = mutableListOf<View>()
@@ -44,7 +52,6 @@ object LibraryManager {
                             val cardView = createCardView(context, cardLayout, recordName, recordData.toString())
                             cardLayout.addView(cardView)
 
-                            // Создаем LayoutParams для привязки
                             val layoutParams = ConstraintLayout.LayoutParams(
                                 ConstraintLayout.LayoutParams.MATCH_PARENT,
                                 ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -52,18 +59,15 @@ object LibraryManager {
                                 topToBottom = previousCardId
                                 startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                                 endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                                topMargin = 20.dpToPx(context) // Отступ 20dp сверху
+                                topMargin = 20.dpToPx(context)
                             }
 
                             cardView.layoutParams = layoutParams
-                            previousCardId = cardView.id // Обновляем привязку для следующей карточки
-
-                            // Добавляем карточку в список
+                            previousCardId = cardView.id
                             cardViews.add(cardView)
                         }
                     }
 
-                    // При удалении карточки обновляем привязки
                     for (cardView in cardViews) {
                         val deleteButton = cardView.findViewById<ImageView>(R.id.imageView6)
                         deleteButton.setOnClickListener {
@@ -86,24 +90,36 @@ object LibraryManager {
                 }
             })
 
-            // Импорт данных из viewLibraries
+            // --- Импорт из viewLibraries ---
             userRef.child("viewLibraries").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val viewViews = mutableListOf<View>()
+
+                    val buildId = snapshot.child("buildId").getValue(Long::class.java)
+                    if (buildId != null) {
+                        onBuildIdFound?.invoke(buildId)
+                    }
+
 
                     for (record in snapshot.children) {
                         val recordName = record.key
                         val recordData = record.value
 
+                        // ✅ Пропускаем buildId — это не карточка
+                        if (recordName == "buildId") continue
+
                         if (recordName != null && recordData != null) {
                             val viewView = createViewView(context, cardLayout, recordName, recordData.toString())
 
-                            // Генерируем уникальный идентификатор для viewView
-                            viewView.id = View.generateViewId()
+                            // ✅ Вставим buildId в textView6 внутри карточки (если нашли)
+                            if (buildId != null) {
+                                val idTextView = viewView.findViewById<TextView>(R.id.textView6)
+                                idTextView.text = buildId.toString()
+                            }
 
+                            viewView.id = View.generateViewId()
                             cardLayout.addView(viewView)
 
-                            // Создаем LayoutParams для привязки
                             val layoutParams = ConstraintLayout.LayoutParams(
                                 ConstraintLayout.LayoutParams.MATCH_PARENT,
                                 ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -111,19 +127,16 @@ object LibraryManager {
                                 topToBottom = previousCardId
                                 startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                                 endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-                                topMargin = 20.dpToPx(context) // Отступ 20dp сверху
+                                topMargin = 20.dpToPx(context)
                             }
 
                             viewView.layoutParams = layoutParams
                             previousCardId = viewView.id
-
-                            // Добавляем view в список
                             viewViews.add(viewView)
                         }
                     }
 
 
-                    // При удалении view обновляем привязки
                     for (viewView in viewViews) {
                         val deleteButton = viewView.findViewById<ImageView>(R.id.imageView6)
                         deleteButton.setOnClickListener {
@@ -136,7 +149,7 @@ object LibraryManager {
                             val bundle = Bundle().apply {
                                 putString("message", viewView.findViewById<EditText>(R.id.build2).text.toString())
                             }
-                            navController.navigate(R.id.nav_slideshow, bundle) // Переход в nav_slideshow
+                            navController.navigate(R.id.nav_slideshow, bundle)
                         }
                     }
                 }
@@ -149,6 +162,7 @@ object LibraryManager {
             Toast.makeText(context, "Ошибка: Пользователь не авторизован", Toast.LENGTH_LONG).show()
         }
     }
+
 
 
     fun createViewView(context: Context, parentLayout: ConstraintLayout, recordName: String, recordData: String): View {

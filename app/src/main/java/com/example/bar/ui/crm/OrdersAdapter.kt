@@ -3,57 +3,81 @@ package com.example.bar.ui.crm
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bar.R
 import com.example.bar.databinding.ItemOrderBinding
-import java.text.SimpleDateFormat
-import java.util.*
 
 class OrdersAdapter(
     private val onEditClick: (OrderResponse) -> Unit,
-    private val onDeleteClick: (OrderResponse) -> Unit
+    private val onDeleteClick: (OrderResponse) -> Unit,
+    private val currentRole: String, // Добавляем текущую роль
+    private val currentUserId: Int? // Добавляем текущий ID пользователя
 ) : ListAdapter<OrderResponse, OrdersAdapter.OrderViewHolder>(OrderDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val binding = ItemOrderBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return OrderViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val order = getItem(position)
+        holder.bind(order)
     }
 
+    // OrdersAdapter.kt - обновим отображение статуса
     inner class OrderViewHolder(private val binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(order: OrderResponse) {
             binding.apply {
+                // Для всех ролей показываем ID заказа
                 tvOrderId.text = "Order #${order.orderId}"
-                tvBuildId.text = "Build: ${order.buildId}"
-                tvStatus.text = "Status: ${order.status}"
-                tvDate.text = formatDate(order.createdAt)
+
+                // Для модераторов/админов добавляем информацию о создателе
+                if (currentRole in listOf("moder", "admin")) {
+                    tvCreator.text = "Created by: ${order.username ?: "Unknown"}"
+                    tvCreator.visibility = View.VISIBLE
+                } else {
+                    tvCreator.visibility = View.GONE
+                }
+
+                // Если заказ в обработке, показываем кто обрабатывает
+                if (order.status != "new" && order.processedBy != null) {
+                    tvProcessor.text = if (order.processedBy == currentUserId) {
+                        "Сontractor : You"
+                    } else {
+                        "Сontractor : ${order.processedBy}"
+                    }
+                    tvCreator.text =  "Created by: ${order.username}"
+                    tvCreator.visibility = View.VISIBLE
+                    tvProcessor.visibility = View.VISIBLE
+                } else {
+                    tvCreator.visibility = View.GONE
+                    tvProcessor.visibility = View.GONE
+                }
+
+                tvBuildId.text = "Build: ${order.buildDescription ?: order.buildId}"
+                tvStatus.text = "Status: ${order.status.capitalize()}"
+
+                val statusColor = when (order.status) {
+                    "new" -> R.color.status_new
+                    "processing" -> R.color.status_processing
+                    "completed" -> R.color.status_completed
+                    "cancelled" -> R.color.status_cancelled
+                    else -> android.R.color.darker_gray
+                }
+                tvStatus.setTextColor(ContextCompat.getColor(itemView.context, statusColor))
 
                 btnEdit.setOnClickListener { onEditClick(order) }
                 btnDelete.setOnClickListener { onDeleteClick(order) }
-
-                // Показываем кнопки только для модераторов и админов
-                val isModerOrAdmin = true // Здесь нужно проверять роль пользователя
-                btnEdit.visibility = if (isModerOrAdmin) View.VISIBLE else View.GONE
-                btnDelete.visibility = if (isModerOrAdmin) View.VISIBLE else View.GONE
-            }
-        }
-
-        private fun formatDate(dateString: String): String {
-            return try {
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-                val date = inputFormat.parse(dateString)
-                val outputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
-                outputFormat.format(date!!)
-            } catch (e: Exception) {
-                dateString
             }
         }
     }

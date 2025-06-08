@@ -101,18 +101,36 @@ class SlideshowFragment : Fragment() {
 
                 val startTime = System.currentTimeMillis()
 
-                fetchCards(viewName, requireContext(), binding.cards) {
-                    val elapsed = System.currentTimeMillis() - startTime
-                    val remainingDelay = if (elapsed < MIN_LOADING_DURATION) {
-                        MIN_LOADING_DURATION - elapsed
-                    } else {
-                        0L
-                    }
+                fun fetchCards(
+                    viewName: String,
+                    context: Context,
+                    parentLayout: ConstraintLayout,
+                    onComplete: () -> Unit
+                ) {
+                    getAndCreateCardsByViewNamePUB(viewName, context, parentLayout) { result ->
+                        result.onSuccess { buildId ->  // Получаем buildId из успешного результата
+                            Toast.makeText(context, "Сборка загружена \"${buildId}\"", Toast.LENGTH_SHORT).show()
+                            binding.textView10.visibility = View.GONE
+                            binding.addComp3.visibility = View.GONE
 
-                    handler.postDelayed({
-                        hideProgress()
-                        clearFocusAndHideKeyboard()
-                    }, remainingDelay)
+                            // Заменяем текст в поисковой строке на ID сборки
+                            binding.editTextText.setText(buildId)
+
+                            onComplete()
+                        }.onFailure { error ->
+                            Toast.makeText(context, "Сбой: ${error.message}", Toast.LENGTH_SHORT).show()
+                            binding.textView10.visibility = View.VISIBLE
+                            binding.addComp3.visibility = View.VISIBLE
+
+                            for (i in binding.cards.childCount - 1 downTo 0) {
+                                val child = binding.cards.getChildAt(i)
+                                if (child != binding.textView10 && child != binding.addComp3) {
+                                    binding.cards.removeViewAt(i)
+                                }
+                            }
+                            onComplete()
+                        }
+                    }
                 }
             } else {
                 Toast.makeText(requireContext(), "Имя не может быть пустым", Toast.LENGTH_SHORT).show()
@@ -167,10 +185,14 @@ class SlideshowFragment : Fragment() {
         onComplete: () -> Unit
     ) {
         getAndCreateCardsByViewNamePUB(viewName, context, parentLayout) { result ->
-            result.onSuccess {
+            result.onSuccess { buildId ->  // Получаем buildId из успешного результата
                 Toast.makeText(context, "Сборка загружена", Toast.LENGTH_SHORT).show()
                 binding.textView10.visibility = View.GONE
                 binding.addComp3.visibility = View.GONE
+
+                // Заменяем текст в поисковой строке на ID сборки
+                binding.editTextText.setText(buildId)
+
                 onComplete()
             }.onFailure { error ->
                 Toast.makeText(context, "Сбой: ${error.message}", Toast.LENGTH_SHORT).show()

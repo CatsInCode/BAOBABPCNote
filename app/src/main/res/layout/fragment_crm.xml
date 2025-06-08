@@ -99,6 +99,18 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <!-- Добавляем кнопку фильтра перед кнопкой создания заказа -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFilterOrders"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Фильтры"
+                    app:icon="@drawable/ic_filter"
+                    app:iconPadding="5dp"
+                    app:iconSize="18dp" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCreateOrder"
                     style="@style/Widget.MaterialComponents.Button"
@@ -140,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="@string/admin_tools"
-                    android:textColor="#101010"
+                    android:textColor="#FF5722"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -152,7 +164,8 @@
                     android:layout_marginBottom="8dp"
                     android:text="@string/manage_users"
                     app:icon="@drawable/ic_user"
-                    app:iconPadding="5dp" />
+                    app:iconPadding="5dp"
+                    app:iconSize="18dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnViewAllOrders"

@@ -1,5 +1,6 @@
 package com.example.bar.ui.gallery
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class GalleryFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,7 +36,15 @@ class GalleryFragment : Fragment() {
 
         val cardLayout = binding.cardLayout
         val firstAnchorView  = binding.build2 // ID первого объекта для привязки
-        LibraryManager.importLibrary(requireContext(), cardLayout, firstAnchorView, this)
+        LibraryManager.importLibrary(
+            context = requireContext(),
+            cardLayout = cardLayout,
+            firstAnchorView = firstAnchorView,
+            fragment = this
+        ) { buildId ->
+            binding.textView6.text = "ID: $buildId"  // Теперь здесь будет отображаться ID сборки
+        }
+
 
         val btn = binding.btn
         btn.setOnClickListener {

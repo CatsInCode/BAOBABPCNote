@@ -75,11 +75,17 @@
     <string name="view_all_orders">Просмотреть все заказы</string>
 
     <!-- Dialog -->
-    <string name="save">Сохранить</string>
+    <string name="save">Сохр</string>
     <string name="cancel">Отмена</string>
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить</string>
     <string name="confirm_delete">Подтвердить удаление</string>
     <string name="delete_message">Вы уверены, что хотите удалить этот заказ?</string>
+
+    <string name="filter_orders">Filter Orders</string>
+    <string name="status_new">New</string>
+    <string name="status_processing">Processing</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_cancelled">Cancelled</string>
 
 </resources>
